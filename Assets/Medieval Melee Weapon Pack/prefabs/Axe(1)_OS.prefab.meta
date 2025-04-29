@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 99c9720ab356a0642a771bea13969a05
-DefaultImporter:
+guid: d0c4f180f05f3e2488dfc85694e6ac67
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 100100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 121237
   packageName: 'Medieval Weapons Pack [Melee]'
   packageVersion: 2.0
-  assetPath: Assets/Scenes/SampleScene.unity
+  assetPath: Assets/Medieval Melee Weapon Pack/prefabs/Axe(1)_OS.prefab
   uploadId: 328428

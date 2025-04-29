@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 99c9720ab356a0642a771bea13969a05
-DefaultImporter:
+guid: 8f5367100291c034c82279a3888282eb
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 121237
   packageName: 'Medieval Weapons Pack [Melee]'
   packageVersion: 2.0
-  assetPath: Assets/Scenes/SampleScene.unity
+  assetPath: Assets/Medieval Melee Weapon Pack/materials/Swords_OH_low_Swords_OH_AlbedoTransparency.mat
   uploadId: 328428
