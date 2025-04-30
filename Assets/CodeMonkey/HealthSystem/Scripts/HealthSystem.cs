@@ -159,6 +159,10 @@ namespace CodeMonkey.HealthSystemCM
             }
         }
 
+        public void HandlePickup()
+        {
+            this.Heal(35);
+        }
 
 
 

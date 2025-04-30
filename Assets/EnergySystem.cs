@@ -169,6 +169,11 @@ public class EnergySystem
         this.isAutoDepleting = isAutoDepleting;
     }
 
+    public void HandlePickup()
+    {
+        this.RegenEnergy(10);
+    }
+
     public static bool TryGetEnergySystem(GameObject getEnergySystemGameObject, out EnergySystem energySystem, bool logErrors = false)
     {
         energySystem = null;

@@ -144,7 +144,7 @@ public class PickupItem : MonoBehaviour
         PickupData data = new PickupData(pickupType, value, gameObject, pickupID);
 
         // Trigger the pickup event
-        OnPickup.Invoke(data);
+        OnPickup.Invoke();
 
         // Spawn pickup effect if assigned
         if (pickupEffectPrefab != null)
@@ -200,7 +200,7 @@ public class PickupItem : MonoBehaviour
     }
 }
 
-public class PickupEvent : UnityEvent<PickupData> { }
+public class PickupEvent : UnityEvent { }
 
 /// <summary>
 /// Data container passed when a pickup is collected

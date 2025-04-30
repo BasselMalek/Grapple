@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmountMax: 100
-  startingHealthAmount: 100
+  startingHealthAmount: 50
 --- !u!114 &703187248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,8 +881,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 134674, guid: 8a2b9fe17763d2946ad000498978f6c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1191060214}
   m_SourcePrefab: {fileID: 100100000, guid: 8a2b9fe17763d2946ad000498978f6c7, type: 3}
+--- !u!1 &1191060213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134674, guid: 8a2b9fe17763d2946ad000498978f6c7, type: 3}
+  m_PrefabInstance: {fileID: 1191060212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1191060214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191060213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8714073af88b184d945a387ac8afe91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupID: item_03
+  pickupName: Item
+  pickupType: 0
+  value: 10
+  destroyOnPickup: 1
+  respawnTime: 10
+  rotateItem: 1
+  rotationSpeed: 50
+  bobUpAndDown: 1
+  bobHeight: 0.2
+  bobSpeed: 1
+  enableWobble: 1
+  wobbleAmount: 15
+  wobbleSpeed: 2
+  wobbleAxis: {x: 0.5, y: 0, z: 0.5}
+  wobblePhaseOffset: 0.5
+  pickupEffectPrefab: {fileID: 0}
+  pickupSound: {fileID: 0}
+  pickupSoundVolume: 1
 --- !u!1001 &1209908765
 PrefabInstance:
   m_ObjectHideFlags: 0

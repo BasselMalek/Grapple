@@ -12,18 +12,21 @@ public class PickupManager : MonoBehaviour
         foreach (PickupItem item in pickupItems)
         {
             // Subscribe to each pickup's OnPickup event
-            item.OnPickup.AddListener(HealthSystem.HandlePickup);
-            item.OnPickup.AddListener(EnergySystem.HandlePickup); // switch to ene
-            item.OnPickup.AddListener(ObjectiveSystem.HandlePickup); // switch to object
-        }
-    }
+            // switch to ene
+            if (item.pickupType == PickupType.Health)
+            {
+                item.OnPickup.AddListener(GetComponentInParent<HealthSystemComponent>().GetHealthSystem().HandlePickup);
 
-    // Optional: Connect to pickups when they're spawned at runtime
-    public void ConnectToPickup(PickupItem newPickup)
-    {
-        if (playerStats != null && newPickup != null)
-        {
-            newPickup.OnPickup.AddListener(playerStats.HandlePickup);
+            }
+            else if (item.pickupType == PickupType.Energy)
+            {
+
+                item.OnPickup.AddListener(GetComponentInParent<EnergySystemComponent>().GetEnergySystem().HandlePickup);
+            }
+            else
+            {
+                item.OnPickup.AddListener(GetComponentInParent<ObjectiveTracker>().HandlePickup);
+            }
         }
     }
 }

@@ -6,7 +6,6 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using CodeMonkey.HealthSystemCM;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -467,11 +466,6 @@ public class FirstPersonController : MonoBehaviour
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
             Debug.DrawRay(origin, direction * distance, Color.green);
-            Debug.Log($"id is {gameObject.GetComponent<HealthSystemComponent>().GetHealthSystem().GetHealthMax()}");
-            Debug.Log($"Health was {gameObject.GetComponent<HealthSystemComponent>().GetHealthSystem().GetHealth()}");
-            gameObject.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(10.0f);
-            Debug.Log($"Health is {gameObject.GetComponent<HealthSystemComponent>().GetHealthSystem().GetHealth()}");
-
             // Print the object's instance ID
             Debug.Log($"Collided with object ID: {hit.collider.gameObject.GetInstanceID()}");
         }
