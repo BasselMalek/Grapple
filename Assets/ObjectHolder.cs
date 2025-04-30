@@ -249,14 +249,6 @@ public class ItemHoldingSystem : MonoBehaviour
 
             // Store the original rotation
             originalItemRotation = heldItem.transform.localRotation;
-
-            // Try to auto-detect if this is a melee weapon
-            WeaponType weaponType = heldItem.GetComponent<WeaponType>();
-            if (weaponType != null)
-            {
-                isMeleeWeapon = weaponType.isMeleeWeapon;
-                weaponDamage = weaponType.baseDamage;
-            }
         }
     }
 
