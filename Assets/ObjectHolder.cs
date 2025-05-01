@@ -19,6 +19,7 @@ public class ItemHoldingSystem : MonoBehaviour
     public float criticalHitChance = 0.1f;  // 10% chance for critical hit
     public float criticalHitMultiplier = 2f; // Damage multiplier for critical hits
     public LayerMask damageableLayers;      // Layers that can receive damage
+    public float energyHitPenality = 3f;
 
     [Header("Collision Settings")]
     public float damageRadius = 1f;         // Radius to check for damage
@@ -32,6 +33,7 @@ public class ItemHoldingSystem : MonoBehaviour
     private List<GameObject> damagedObjects = new List<GameObject>(); // Track already hit objects during swing
     private Vector3 currentSwingDirection;
     private bool damageDone = false;  // Track if damage has been applied in current swing
+    private EnergySystem playerEnergySystem;
 
     [System.Serializable]
     public class DamageInfo
@@ -47,6 +49,7 @@ public class ItemHoldingSystem : MonoBehaviour
         // Store original rotation of the held item
         if (heldItem != null)
         {
+            playerEnergySystem = GetComponentInParent<EnergySystemComponent>().GetEnergySystem();
             originalItemRotation = heldItem.transform.localRotation;
         }
 
@@ -80,14 +83,7 @@ public class ItemHoldingSystem : MonoBehaviour
         // Check for left click or specified input
         if (Input.GetMouseButtonDown(0) && !isSwinging)
         {
-            StartSwingAnimation();
-        }
-
-        // Optional: Add combo system by checking for clicks during swing
-        if (Input.GetMouseButtonDown(0) && isSwinging && swingTimer > 0.7f)
-        {
-            // Queue up next swing (could be expanded to a full combo system)
-            CancelSwing();
+            playerEnergySystem.EnergyDamage(energyHitPenality);
             StartSwingAnimation();
         }
     }
@@ -162,17 +158,6 @@ public class ItemHoldingSystem : MonoBehaviour
         }
     }
 
-    void CancelSwing()
-    {
-        if (isSwinging)
-        {
-            // Quick reset for combo chains
-            heldItem.transform.localRotation = originalItemRotation;
-            isSwinging = false;
-            OnSwingCancel?.Invoke();
-        }
-    }
-
     void CheckForDamage()
     {
         if (damageOrigin == null) return;
@@ -226,30 +211,6 @@ public class ItemHoldingSystem : MonoBehaviour
     {
         // Base implementation - can be expanded to include armor, resistances, etc.
         return weaponDamage;
-    }
-
-    // Set the held item
-    public void SetHeldItem(GameObject newItem)
-    {
-        // Clean up old item if it exists
-        if (heldItem != null)
-        {
-            Destroy(heldItem);
-        }
-
-        // Set new item
-        heldItem = newItem;
-
-        if (heldItem != null)
-        {
-            // Ensure it's properly parented and positioned
-            heldItem.transform.SetParent(itemHoldPosition, false);
-            heldItem.transform.localPosition = Vector3.zero;
-            heldItem.transform.localRotation = Quaternion.identity;
-
-            // Store the original rotation
-            originalItemRotation = heldItem.transform.localRotation;
-        }
     }
 
     void OnDrawGizmosSelected()

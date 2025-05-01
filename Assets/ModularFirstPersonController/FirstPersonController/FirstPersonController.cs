@@ -58,12 +58,17 @@ public class FirstPersonController : MonoBehaviour
 
     // Internal Variables
     private bool isWalking = false;
+    private EnergySystem playerEnergySystem;
+    private float walkingDeplete;
+    private float runningDeplete;
 
     #region Sprint
 
     public bool enableSprint = true;
     public bool unlimitedSprint = false;
     public KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField]
+    public float energySprintPenality = 3.5f;
     public float sprintSpeed = 7f;
     public float sprintDuration = 5f;
     public float sprintCooldown = .5f;
@@ -162,6 +167,9 @@ public class FirstPersonController : MonoBehaviour
         {
             crosshairObject.gameObject.SetActive(false);
         }
+        playerEnergySystem = GetComponentInParent<EnergySystemComponent>().GetEnergySystem();
+        walkingDeplete = playerEnergySystem.GetDepletionRate();
+        runningDeplete = playerEnergySystem.GetDepletionRate() * energySprintPenality;
 
         #region Sprint Bar
 
@@ -277,7 +285,6 @@ public class FirstPersonController : MonoBehaviour
             {
                 isZoomed = false;
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
-
                 // Drain sprint remaining while sprinting
                 if (!unlimitedSprint)
                 {
@@ -387,6 +394,7 @@ public class FirstPersonController : MonoBehaviour
                 targetVelocity = transform.TransformDirection(targetVelocity) * sprintSpeed;
 
                 // Apply a force that attempts to reach our target velocity
+                playerEnergySystem.SetDepletionRate(runningDeplete);
                 Vector3 velocity = rb.linearVelocity;
                 Vector3 velocityChange = (targetVelocity - velocity);
                 velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
@@ -416,6 +424,7 @@ public class FirstPersonController : MonoBehaviour
             else
             {
                 isSprinting = false;
+                playerEnergySystem.SetDepletionRate(walkingDeplete);
 
                 if (hideBarWhenFull && sprintRemaining == sprintDuration)
                 {
